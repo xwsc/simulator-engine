@@ -35,7 +35,8 @@ All modules can be toggled directly inside SillyTavern's **Prompt Manager**:
 
 * **Core Engine (No Toggles):** ~2,450 – 2,970 tokens
 * **Full Engine (All Toggles Active):** ~3,300 – 4,000 tokens
-* **Automatic Token Saver:** This preset includes bundled **Regex Scripts** that automatically strip old `Scene Anchors`, `Obligations`, `Story Strings`, and `<font>` tags from the prompt context beyond the last 4 messages while keeping them fully visible in your chat UI.
+* **Automatic Token Saver:** Includes bundled **Regex Scripts** (`minDepth: 4`) that strip older `Scene Anchors`, `Obligations`, `Story Strings`, and `<font>` tags from the prompt context beyond the last 4 messages. (`Scene Anchors` remain visible in your chat UI; `Obligations` and `Story Strings` are HTML comments and stay hidden unless you inspect the raw message.)
+  * *How Obligations Carry Over:* Each turn, the AI re-emits the active `<!-- OB: ... -->` list at the bottom of the new response. If `"Mira owes the innkeeper a key"` is logged on Turn 1, the AI carries it forward in Turns 2–6 while the regex strips Turn 1's stale copy once it passes depth 4—then drops it once the key is returned for example on Turn 7.
 
 ---
 
